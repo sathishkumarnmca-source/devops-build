@@ -1,0 +1,145 @@
+Started by user sathishkumar
+Obtained Jenkinsfile from git https://github.com/sathishkumarnmca-source/devops-build.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Prod-Deployment
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+Warning: CredentialId "dockerhub" could not be found.
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Prod-Deployment/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/sathishkumarnmca-source/devops-build.git # timeout=10
+Fetching upstream changes from https://github.com/sathishkumarnmca-source/devops-build.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.50.1'
+ > git fetch --tags --force --progress -- https://github.com/sathishkumarnmca-source/devops-build.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision c186618a2b23a2c3ef63f788ff13c53801ab252d (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f c186618a2b23a2c3ef63f788ff13c53801ab252d # timeout=10
+Commit message: "jenkins file"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DOCKERHUB_CRED or $DOCKERHUB_CRED_PSW
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Prod-Deployment/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/sathishkumarnmca-source/devops-build.git # timeout=10
+Fetching upstream changes from https://github.com/sathishkumarnmca-source/devops-build.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.50.1'
+ > git fetch --tags --force --progress -- https://github.com/sathishkumarnmca-source/devops-build.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision c186618a2b23a2c3ef63f788ff13c53801ab252d (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f c186618a2b23a2c3ef63f788ff13c53801ab252d # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D dev # timeout=10
+ > git checkout -b dev c186618a2b23a2c3ef63f788ff13c53801ab252d # timeout=10
+Commit message: "jenkins file"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ ./build.sh
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 180B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/nginx:latest
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 100B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 936.77kB 0.0s done
+#4 DONE 0.1s
+
+#5 [1/2] FROM docker.io/library/nginx:latest@sha256:6e23479198b998e5e25921dff8455837c7636a67111a04a635cf1bb363d199dc
+#5 resolve docker.io/library/nginx:latest@sha256:6e23479198b998e5e25921dff8455837c7636a67111a04a635cf1bb363d199dc 0.0s done
+#5 sha256:6e23479198b998e5e25921dff8455837c7636a67111a04a635cf1bb363d199dc 10.23kB / 10.23kB done
+#5 sha256:296499281873ebe2636681c6957776d29a31858d93c3e39b654b5aade87ed70a 2.29kB / 2.29kB done
+#5 sha256:3531af2bc2a9c8883754652783cf96207d53189db279c9637b7157d034de7ecd 6.29MB / 29.78MB 0.1s
+#5 sha256:ce776bbcda0d6bf4da8df324b82066a03f45bfbbbe520df535293ae069994e84 5.24MB / 33.16MB 0.1s
+#5 sha256:4677c2a9a3d4f9290cb784d95a9e16378655ecdd7df9e77668d3915262730d0b 0B / 956B 0.1s
+#5 sha256:6c3a6ea6608c89c79027066654a2ef4f0fe58a7bf2c08cc3894733406e476602 9.09kB / 9.09kB done
+#5 sha256:85c66128325abc04138f6944d943e5279375665f6dbefe7f4f6b5e9646d31998 629B / 629B 0.1s done
+#5 sha256:677c631968686eeb23ab8dd436d49bde041266df5d8952f03d7a8c418643d4b5 0B / 1.21kB 0.2s
+#5 sha256:3531af2bc2a9c8883754652783cf96207d53189db279c9637b7157d034de7ecd 26.21MB / 29.78MB 0.3s
+#5 sha256:ce776bbcda0d6bf4da8df324b82066a03f45bfbbbe520df535293ae069994e84 25.17MB / 33.16MB 0.3s
+#5 sha256:4677c2a9a3d4f9290cb784d95a9e16378655ecdd7df9e77668d3915262730d0b 956B / 956B 0.1s done
+#5 sha256:677c631968686eeb23ab8dd436d49bde041266df5d8952f03d7a8c418643d4b5 1.21kB / 1.21kB 0.2s done
+#5 sha256:ff048f1f2159a060f69b1861ea262b839cc6e77a9389848929f70275eb7c9e29 403B / 403B 0.2s done
+#5 sha256:801a1ad15b4e00add388aca409568400fb8071019d6ba83995f43170af7656fe 1.40kB / 1.40kB 0.3s done
+#5 extracting sha256:3531af2bc2a9c8883754652783cf96207d53189db279c9637b7157d034de7ecd
+#5 sha256:3531af2bc2a9c8883754652783cf96207d53189db279c9637b7157d034de7ecd 29.78MB / 29.78MB 0.4s done
+#5 sha256:ce776bbcda0d6bf4da8df324b82066a03f45bfbbbe520df535293ae069994e84 33.16MB / 33.16MB 0.4s done
+#5 extracting sha256:3531af2bc2a9c8883754652783cf96207d53189db279c9637b7157d034de7ecd 0.7s done
+#5 extracting sha256:ce776bbcda0d6bf4da8df324b82066a03f45bfbbbe520df535293ae069994e84 0.1s
+#5 extracting sha256:ce776bbcda0d6bf4da8df324b82066a03f45bfbbbe520df535293ae069994e84 0.7s done
+#5 extracting sha256:85c66128325abc04138f6944d943e5279375665f6dbefe7f4f6b5e9646d31998 done
+#5 extracting sha256:4677c2a9a3d4f9290cb784d95a9e16378655ecdd7df9e77668d3915262730d0b done
+#5 extracting sha256:ff048f1f2159a060f69b1861ea262b839cc6e77a9389848929f70275eb7c9e29 done
+#5 extracting sha256:677c631968686eeb23ab8dd436d49bde041266df5d8952f03d7a8c418643d4b5
+#5 extracting sha256:677c631968686eeb23ab8dd436d49bde041266df5d8952f03d7a8c418643d4b5 done
+#5 extracting sha256:801a1ad15b4e00add388aca409568400fb8071019d6ba83995f43170af7656fe done
+#5 DONE 2.0s
+
+#6 [2/2] COPY . /usr/share/nginx/html
+#6 DONE 0.4s
+
+#7 exporting to image
+#7 exporting layers 0.0s done
+#7 writing image sha256:6c0ec8bcc31b7be35daa50fb15eeeffaafd5bbc966190ce371a8a88aae8a9012 done
+#7 naming to docker.io/library/react-app done
+#7 DONE 0.0s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to Dev Repo)
+Stage "Push to Dev Repo" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to Prod Repo)
+Stage "Push to Prod Repo" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] sh
++ ./deploy.sh
+Error response from daemon: No such container: devops-container
+Error response from daemon: No such container: devops-container
+9c176b45d00d3c15bc3965d220e9f97ee39d55cae788970e24ee2159379ba606
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
