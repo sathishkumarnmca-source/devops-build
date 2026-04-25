@@ -19,7 +19,7 @@ pipeline {
             }
         }
         stage('Push to Prod Repo') {
-            when { branch 'master' }
+            when { branch 'main' }
             steps {
                 sh 'docker login -u $DOCKERHUB_CRED_USR -p $DOCKERHUB_CRED_PSW'
                 sh 'docker tag react-app:latest sathishdocker3011/prod:latest'
