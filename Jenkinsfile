@@ -1,32 +1,26 @@
 pipeline {
     agent any
-    environment {
-        DOCKERHUB_CRED = credentials('dockerhub-creds')
-    }
     stages {
         stage('Checkout') {
-            steps { git branch: 'dev', url: 'https://github.com/sathishkumarnmca-source/devops-build.git' }
+            steps { git branch: 'dev', url: ' https://github.com/sathishkumarnmca-source/devops-build.git ' }
         }
-        stage('Build') {
+        stage('Build Docker Image') {
             steps { sh './build.sh' }
         }
-        stage('Push to Dev Repo') {
-            when { branch 'dev' }
+        stage('Push to DockerHub') {
             steps {
-                sh 'docker login -u $DOCKERHUB_CRED_USR -p $DOCKERHUB_CRED_PSW'
-                sh 'docker tag react-app:latest sathishdocker3011/dev:latest'
-                sh 'docker push sathishdocker3011/dev:latest'
+                script {
+                    if (env.BRANCH_NAME == 'dev') {
+                        sh 'docker tag react-app:latest <dockerhub-username>/dev:latest'
+                        sh 'docker push <dockerhub-username>/dev:latest'
+                    } else if (env.BRANCH_NAME == 'master') {
+                        sh 'docker tag react-app:latest <dockerhub-username>/prod:latest'
+                        sh 'docker push <dockerhub-username>/prod:latest'
+                    }
+                }
             }
         }
-        stage('Push to Prod Repo') {
-            when { branch 'main' }
-            steps {
-                sh 'docker login -u $DOCKERHUB_CRED_USR -p $DOCKERHUB_CRED_PSW'
-                sh 'docker tag react-app:latest sathishdocker3011/prod:latest'
-                sh 'docker push sathishdocker3011/prod:latest'
-            }
-        }
-        stage('Deploy') {
+        stage('Deploy to EC2') {
             steps { sh './deploy.sh' }
         }
     }
