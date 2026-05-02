@@ -11,11 +11,11 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'dev') {
-                        sh 'docker tag react-app:latest <dockerhub-username>/dev:latest'
-                        sh 'docker push <dockerhub-username>/dev:latest'
-                    } else if (env.BRANCH_NAME == 'master') {
-                        sh 'docker tag react-app:latest <dockerhub-username>/prod:latest'
-                        sh 'docker push <dockerhub-username>/prod:latest'
+                        sh 'docker tag reactbuild sathishdocker3011/dev:latest'
+                        sh 'docker push sathishdocker3011/dev:latest'
+                    } else if (env.BRANCH_NAME == 'main') {
+                        sh 'docker tag reactbuild sathishdocker3011/prod:latest'
+                        sh 'docker push sathishdocker3011/prod:latest'
                     }
                 }
             }
